@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "darius@matulionis.lt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/numerals": {
+            "get": {
+                "tags": [
+                    "Numerals"
+                ],
+                "summary": "Get/Paginate the list of numeral conversions",
+                "description": "Get/Paginate the list of numeral conversions",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "the list of fields to be included (comma separated)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "the column by which the records to be sorted",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "the direction by which the records to be sorted: ASC-DESC",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/numerals/convert-roman": {
+            "post": {
+                "tags": [
+                    "Numerals"
+                ],
+                "summary": "Convert integer to roman",
+                "description": "Convert integer to roman",
+                "operationId": "convert-roman",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "description": "integer value",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "unsuccessful operation, missing field value",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/numerals/top-10": {
+            "get": {
+                "tags": [
+                    "Numerals"
+                ],
+                "summary": "Get the list of top 10 numeral conversions",
+                "description": "Get the list of top 10 numeral conversions",
+                "operationId": "top10",
+                "parameters": [
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "the list of fields to be included (comma separated)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
