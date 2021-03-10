@@ -2,13 +2,9 @@
 
 namespace Tests\Controllers\Api\v1;
 
-use App\Http\Resources\v1\NumberConversionsResource;
 use App\Models\NumberConversions;
-use App\Repositories\NumberConversionsRepository;
-use App\Services\NumericConverter\NumericConverter;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class NumeralsControllerTest extends TestCase

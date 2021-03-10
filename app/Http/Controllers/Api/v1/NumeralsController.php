@@ -40,7 +40,7 @@ class NumeralsController
      *          )
      *      ),
      *     @OA\Parameter(
-     *          name="sort_by",
+     *          name="order_by",
      *          description="the column by which the records to be sorted",
      *          required=false,
      *          in="query",
@@ -49,7 +49,7 @@ class NumeralsController
      *          )
      *      ),
      *     @OA\Parameter(
-     *          name="order_by",
+     *          name="sort_by",
      *          description="the direction by which the records to be sorted: ASC-DESC",
      *          required=false,
      *          in="query",
@@ -73,7 +73,7 @@ class NumeralsController
             'fields' => $request->get('fields'),
             'sort_by' => $request->get('sort_by'),
             'order_by' => $request->get('order_by'),
-        ], true));
+        ], true))->response()->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -151,6 +151,6 @@ class NumeralsController
             'sort_by'   => 'count',
             'order_by'  => 'DESC',
             'limit'     => 10,
-        ], false));
+        ], false))->response()->setStatusCode(Response::HTTP_OK);
     }
 }

@@ -32,7 +32,7 @@
                         }
                     },
                     {
-                        "name": "sort_by",
+                        "name": "order_by",
                         "in": "query",
                         "description": "the column by which the records to be sorted",
                         "required": false,
@@ -41,7 +41,7 @@
                         }
                     },
                     {
-                        "name": "order_by",
+                        "name": "sort_by",
                         "in": "query",
                         "description": "the direction by which the records to be sorted: ASC-DESC",
                         "required": false,

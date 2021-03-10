@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 use App\Models\NumberConversions;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class NumberConversionsRepository implements NumberConversionsRepositoryInterface
@@ -32,9 +31,10 @@ class NumberConversionsRepository implements NumberConversionsRepositoryInterfac
         $query = $this->number_conversions::query();
 
         //apply sort
-        if(isset($params['sort_by'])&&!empty($params['sort_by'])&&$this->checkFieldsExists([$params['sort_by']]))
+        if(isset($params['order_by'])&&!empty($params['order_by'])&&
+            $this->checkFieldsExists([$params['order_by']])&&in_array(strtolower($params['sort_by']??''), ['asc', 'desc']))
         {
-            $query->orderBy($params['sort_by'], in_array($params['order_by'], ['ASC', 'DESC']) ? $params['order_by'] : 'ASC');
+            $query->orderBy($params['order_by'], $params['sort_by']);
         }
 
         //check for specific fields requested
