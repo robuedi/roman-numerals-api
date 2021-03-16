@@ -22,7 +22,7 @@ class NumberConversionsRepository implements NumberConversionsRepositoryInterfac
     public function incrementForValue(int $value) : void
     {
         $conversion = $this->number_conversions->firstOrCreate(['value' => $value]);
-        $conversion->count++;
+        $conversion->increment('count', 1);
         $conversion->save();
     }
 
