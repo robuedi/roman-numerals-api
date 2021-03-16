@@ -9,6 +9,7 @@ use App\Http\Requests\Api\v1\IndexRequest;
 use App\Http\Requests\Api\v1\Top10Request;
 use App\Http\Resources\v1\NumberConversionsResource;
 use App\Repositories\NumberConversionsRepositoryInterface;
+use App\Repositories\ParamObj\NrConversionsRepoIndex;
 use App\Services\NumericConverter\NumericConverterInterface;
 use Illuminate\Http\Response;
 
@@ -69,11 +70,12 @@ class NumeralsController
      */
     public function index(IndexRequest $request)
     {
-        return NumberConversionsResource::collection($this->number_conversions_repository->index([
-            'fields' => $request->get('fields'),
-            'sort_by' => $request->get('sort_by'),
-            'order_by' => $request->get('order_by'),
-        ], true))->response()->setStatusCode(Response::HTTP_OK);
+        return NumberConversionsResource::collection($this->number_conversions_repository->index(
+            (new NrConversionsRepoIndex(
+                $request->get('fields'),
+                $request->get('order_by'),
+                $request->get('sort_by'),
+                null)), true))->response()->setStatusCode(Response::HTTP_OK);
     }
 
     /**
@@ -146,11 +148,12 @@ class NumeralsController
      */
     public function top10(Top10Request $request)
     {
-        return NumberConversionsResource::collection($this->number_conversions_repository->index([
-            'fields'    => $request->get('fields'),
-            'sort_by'   => 'count',
-            'order_by'  => 'DESC',
-            'limit'     => 10,
-        ], false))->response()->setStatusCode(Response::HTTP_OK);
+        return NumberConversionsResource::collection($this->number_conversions_repository->index(
+            (new NrConversionsRepoIndex(
+                $request->get('fields'),
+                'count',
+                'DESC',
+                10))
+        , false))->response()->setStatusCode(Response::HTTP_OK);
     }
 }

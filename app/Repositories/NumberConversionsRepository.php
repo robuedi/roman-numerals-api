@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Models\NumberConversions;
+use App\Repositories\ParamObj\NrConversionsRepoIndex;
 use Illuminate\Support\Facades\Schema;
 
 class NumberConversionsRepository implements NumberConversionsRepositoryInterface
@@ -26,22 +27,20 @@ class NumberConversionsRepository implements NumberConversionsRepositoryInterfac
      * @param array $params - fields:array, sort_by:string, order_by:string
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function index(array $params, bool $paginate = false)
+    public function index(NrConversionsRepoIndex $params, bool $paginate = false)
     {
         $query = $this->number_conversions::query();
 
         //apply sort
-        if(isset($params['order_by'])&&!empty($params['order_by'])&&
-            $this->checkFieldsExists([$params['order_by']])&&in_array(strtolower($params['sort_by']??''), ['asc', 'desc']))
+        if($params->getOrderBy()&&$this->checkFieldsExists($params->getOrderBy()))
         {
-            $query->orderBy($params['order_by'], $params['sort_by']);
+            $query->orderBy($params->getOrderBy(), $params->getSortBy());
         }
 
         //check for specific fields requested
-        $fields = explode(',', $params['fields'] ?? '');
-        if(array_filter($fields)&&$this->checkFieldsExists($fields))
+        if($this->checkFieldsExists($params->getFields()))
         {
-            $query->select($fields);
+            $query->select($params->getFields());
         }
 
         //check if paginate enable
@@ -51,9 +50,9 @@ class NumberConversionsRepository implements NumberConversionsRepositoryInterfac
         }
 
         //check limit number
-        if(isset($params['limit'])&&!empty($params['limit']))
+        if($params->getLimit())
         {
-            $query->limit($params['limit']);
+            $query->limit($params->getLimit());
         }
 
         return $query->get();
