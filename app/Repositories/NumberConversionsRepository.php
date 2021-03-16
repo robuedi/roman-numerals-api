@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 use App\Models\NumberConversions;
 use App\Repositories\Functionalities\FieldsExistsInterface;
-use App\Repositories\ParamObj\NrConversionsRepoIndex;
+use App\Repositories\ParamObj\NrConversionsRepoIndexInterface;
 
 class NumberConversionsRepository implements NumberConversionsRepositoryInterface
 {
@@ -30,7 +30,7 @@ class NumberConversionsRepository implements NumberConversionsRepositoryInterfac
      * @param array $params - fields:array, sort_by:string, order_by:string
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function index(NrConversionsRepoIndex $params, bool $paginate = false)
+    public function index(NrConversionsRepoIndexInterface $params, bool $paginate = false)
     {
         $query = $this->number_conversions::query();
 

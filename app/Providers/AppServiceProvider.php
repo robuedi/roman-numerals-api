@@ -6,6 +6,8 @@ use App\Repositories\Functionalities\FieldsExists;
 use App\Repositories\Functionalities\FieldsExistsInterface;
 use App\Repositories\NumberConversionsRepository;
 use App\Repositories\NumberConversionsRepositoryInterface;
+use App\Repositories\ParamObj\NrConversionsRepoIndex;
+use App\Repositories\ParamObj\NrConversionsRepoIndexInterface;
 use App\Services\NumericConverter\NumericConverter;
 use App\Services\NumericConverter\NumericConverterInterface;
 use Illuminate\Support\ServiceProvider;

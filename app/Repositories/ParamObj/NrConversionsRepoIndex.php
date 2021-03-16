@@ -4,7 +4,7 @@
 namespace App\Repositories\ParamObj;
 
 
-class NrConversionsRepoIndex
+class NrConversionsRepoIndex implements NrConversionsRepoIndexInterface
 {
 
     private ?string $order_by = null;
