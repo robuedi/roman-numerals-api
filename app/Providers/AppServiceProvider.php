@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Functionalities\FieldsExists;
+use App\Repositories\Functionalities\FieldsExistsInterface;
 use App\Repositories\NumberConversionsRepository;
 use App\Repositories\NumberConversionsRepositoryInterface;
 use App\Services\NumericConverter\NumericConverter;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
         //Services
         app()->bind(NumericConverterInterface::class, NumericConverter::class);
+        app()->bind(FieldsExistsInterface::class, FieldsExists::class);
     }
 
     /**
